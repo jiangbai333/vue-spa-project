@@ -7,10 +7,13 @@ const path = require('path')
 
 module.exports = {
 
-    entry: './src/index.js',
+    entry: {
+        index: './src/index/index.js',
+        login: './src/login/index.js',
+    },
     output: {
-        path: path.resolve(__dirname, 'dist'),
-        filename: 'build.js'
+        path: path.resolve(__dirname, '../view/src/main/resources/view'),
+        filename: '[name]/build.js'
     },
     module: {
         rules: [{
@@ -33,7 +36,8 @@ module.exports = {
                 loader: 'url-loader',
                 options: {
                     // 当资源文件大小小于limit值时，会以Data URI的格式，内嵌到HTML中
-                    limit: 10000
+                    limit: 10000,
+                    name: 'rs/[hash].[ext]'
                 }
             }]
         }, {
@@ -43,7 +47,7 @@ module.exports = {
             use: ExtractTextPlugin.extract({
 
                 // 当输出到多目录时，解决字体打包后，css打包文件引用位置不对的情况
-                //publicPath: "../", 
+                publicPath: "../", 
 
                 // 当使用 sass 语法时，取消行内注释，但是生成的样式文件不被压缩
                 use: ["css-loader"/*, "sass-loader"*/]
@@ -57,13 +61,21 @@ module.exports = {
     plugins: [
 
         new HtmlWebpackPlugin({
-            template: './src/index.html',
+            template: './src/index/index.html',
+            filename: 'index/index.html',
+            chunks: ['index']
+        }),
+
+        new HtmlWebpackPlugin({
+            template: './src/login/index.html',
+            filename: 'login/index.html',
+            chunks: ['login']
         }),
 
         new VueLoaderPlugin(),
 
         // 将样式表提取到文件
-        new ExtractTextPlugin("styles.css")
+        new ExtractTextPlugin("[name]/style.css")
     ],
     
     /**
