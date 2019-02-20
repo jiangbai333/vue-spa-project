@@ -5,7 +5,11 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "webpack-dev-server --hot --inline --host 0.0.0.0"
+    "clear": "rm -rf dist/*",
+    "start": "webpack-dev-server --config ./config/webpack/webpack.dev.config.js --inline --host 0.0.0.0 --profile",
+    "hot": "webpack-dev-server --config ./config/webpack/webpack.hot.config.js --hot --inline --host 0.0.0.0 --profile",
+    "prod": "npm run clear && webpack --config ./config/webpack/webpack.prod.config.js --profile --watch",
+    "build": "npm run clear && webpack --config ./config/webpack/webpack.prod.config.js --profile"
   },
   "keywords": [],
   "author": "",
@@ -27,6 +31,7 @@
     "file-loader": "^2.0.0",
     "html-loader": "^0.5.5",
     "html-webpack-plugin": "^3.2.0",
+    "mini-css-extract-plugin": "^0.5.0",
     "node-sass": "^4.11.0",
     "sass-loader": "^7.1.0",
     "style-loader": "^0.23.1",

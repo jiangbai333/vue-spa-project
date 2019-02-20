@@ -3,17 +3,21 @@ const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const VueLoaderPlugin = require('vue-loader/lib/plugin');
 
-const path = require('path')
+const config = require('../context.js');
 
 module.exports = {
 
+    devtool: 'cheap-module-eval-source-map',
+
     entry: {
-        index: './src/index/index.js',
-        login: './src/login/index.js',
+        index: config.srcPath + '/index/index.js',
+        login: config.srcPath + '/login/index.js',
     },
     output: {
-        path: path.resolve(__dirname, 'dist'),
-        filename: '[name]/build.js'
+        path: config.outputPath,
+        filename: '[name]/[hash:7].js'
+        // chunkhash 与热部署不兼容 如果想让它好使 需要去掉 --hot
+        //filename: '[name]/[chunkhash:7].js'
     },
     module: {
         rules: [{
@@ -60,21 +64,21 @@ module.exports = {
     },
     plugins: [
         new HtmlWebpackPlugin({
-            template: './src/index/index.html',
+            template: config.srcPath + '/index/index.html',
             filename: 'index/index.html',
-            chunks: ['index', 'vendor', 'common']
+            chunks: ['index', 'vendor', 'common', 'manifest']
         }),
 
         new HtmlWebpackPlugin({
-            template: './src/login/index.html',
+            template: config.srcPath + '/login/index.html',
             filename: 'login/index.html',
-            chunks: ['login', 'vendor', 'common']
+            chunks: ['login', 'vendor', 'common', 'manifest']
         }),
 
         new VueLoaderPlugin(),
 
         // 将样式表提取到文件
-        new ExtractTextPlugin("[name]/style.css")
+        new ExtractTextPlugin("[name]/index.css")
     ],
     
     /**
@@ -119,6 +123,9 @@ module.exports = {
                     priority:1
                 }
             }
+        },
+        runtimeChunk: {
+            name: 'manifest'
         } 
     },
     resolve: {
