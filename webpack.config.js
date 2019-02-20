@@ -12,7 +12,7 @@ module.exports = {
         login: './src/login/index.js',
     },
     output: {
-        path: path.resolve(__dirname, '../view/src/main/resources/view'),
+        path: path.resolve(__dirname, 'dist'),
         filename: '[name]/build.js'
     },
     module: {
@@ -59,17 +59,16 @@ module.exports = {
         }]
     },
     plugins: [
-
         new HtmlWebpackPlugin({
             template: './src/index/index.html',
             filename: 'index/index.html',
-            chunks: ['index']
+            chunks: ['index', 'vendor', 'common']
         }),
 
         new HtmlWebpackPlugin({
             template: './src/login/index.html',
             filename: 'login/index.html',
-            chunks: ['login']
+            chunks: ['login', 'vendor', 'common']
         }),
 
         new VueLoaderPlugin(),
@@ -95,7 +94,32 @@ module.exports = {
                     }
                 }
             })
-        ] 
+        ],
+        splitChunks: {
+            cacheGroups: {
+                //node_modules内的依赖
+                vendor:{
+                    chunks:"all",
+                    test: /[\\/]node_modules[\\/]/,
+                    name:"vendor",
+                    minChunks: 1, //引用次数x次以上则提取
+                    maxInitialRequests: 5,
+                    minSize: 0,
+                    priority:100,
+                    // enforce: true?
+                },
+                // 'src' 下的类库
+                common: {
+                    chunks:"all",
+                    test:/[\\/]src[\\/].*\.js/,//也可以传入文件/[\\/]src[\\/]js[\\/].*\.js/,  
+                    name: "common",
+                    minChunks: 2,
+                    maxInitialRequests: 5,
+                    minSize: 0,
+                    priority:1
+                }
+            }
+        } 
     },
     resolve: {
         alias: {
