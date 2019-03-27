@@ -10,8 +10,8 @@ module.exports = {
     devtool: 'cheap-module-eval-source-map',
 
     entry: {
-        index: config.srcPath + '/index/index.js',
-        login: config.srcPath + '/login/index.js',
+        index: config.pagesPath + '/index/index.js',
+        login: config.pagesPath + '/login/index.js',
     },
     output: {
         path: config.outputPath,
@@ -51,7 +51,7 @@ module.exports = {
             use: ExtractTextPlugin.extract({
 
                 // 当输出到多目录时，解决字体打包后，css打包文件引用位置不对的情况
-                publicPath: "../", 
+                publicPath: "../",
 
                 // 当使用 sass 语法时，取消行内注释，但是生成的样式文件不被压缩
                 use: ["css-loader"/*, "sass-loader"*/]
@@ -64,13 +64,13 @@ module.exports = {
     },
     plugins: [
         new HtmlWebpackPlugin({
-            template: config.srcPath + '/index/index.html',
+            template: config.pagesPath + '/index/index.html',
             filename: 'index/index.html',
             chunks: ['index', 'vendor', 'common', 'manifest']
         }),
 
         new HtmlWebpackPlugin({
-            template: config.srcPath + '/login/index.html',
+            template: config.pagesPath + '/login/index.html',
             filename: 'login/index.html',
             chunks: ['login', 'vendor', 'common', 'manifest']
         }),
@@ -80,7 +80,7 @@ module.exports = {
         // 将样式表提取到文件
         new ExtractTextPlugin("[name]/index.css")
     ],
-    
+
     /**
      *
      * 代码压缩配置
@@ -91,8 +91,8 @@ module.exports = {
                 uglifyOptions: {
                     /*compress: true,*/
                     mangle: true,
-                    minify: true, 
-                    output: { 
+                    minify: true,
+                    output: {
                         // 去掉注释
                         comments: false
                     }
@@ -115,7 +115,7 @@ module.exports = {
                 // 'src' 下的类库
                 common: {
                     chunks:"all",
-                    test:/[\\/]src[\\/].*\.js/,//也可以传入文件/[\\/]src[\\/]js[\\/].*\.js/,  
+                    test:/[\\/]src[\\/].*\.js/,//也可以传入文件/[\\/]src[\\/]js[\\/].*\.js/,
                     name: "common",
                     minChunks: 2,
                     maxInitialRequests: 5,
@@ -126,7 +126,7 @@ module.exports = {
         },
         runtimeChunk: {
             name: 'manifest'
-        } 
+        }
     },
     resolve: {
         alias: {

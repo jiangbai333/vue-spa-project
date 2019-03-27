@@ -6,5 +6,7 @@ module.exports = {
 
     outputPath: path.resolve(__dirname, '..', 'dist'),
 
-    srcPath: path.resolve(__dirname, '..', 'src')
+    srcPath: path.resolve(__dirname, '..', 'src'),
+
+    pagesPath: path.resolve(__dirname, '..', 'src/pages')
 };
