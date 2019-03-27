@@ -1,9 +1,9 @@
 <template>
-    <div>
-        <Layout :style="{minHeight: '100vh'}">
-            <h></h>
-        </Layout>
-    </div>
+  <div>
+    <Layout :style="{minHeight: '100vh'}">
+    <h></h>
+    </Layout>
+  </div>
 </template>
 
 <script>
