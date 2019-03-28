@@ -1,7 +1,7 @@
 <template>
   <div>
     <Layout :style="{minHeight: '100vh'}">
-    <h></h>
+      <h></h>
     </Layout>
   </div>
 </template>

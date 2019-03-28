@@ -15,10 +15,10 @@ export default {
       litext: "",
       msg: "首页",
       navs: [
-      {li: "li1"},
-      {li: "li2"},
-      {li: "li3"},
-      {li: "li4"},
+        {li: "li1"},
+        {li: "li2"},
+        {li: "li3"},
+        {li: "li4"},
       ]
     }
   },
