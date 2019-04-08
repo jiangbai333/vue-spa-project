@@ -1,17 +1,17 @@
 <template>
-    <div>
-        <Layout :style="{minHeight: '100vh'}">
-            <h></h>
-            <Layout>
-                <Sider collapsible :collapsed-width="78" v-model="isCollapsed" @on-collapse="collapseing">
-                    <m></m>
-                </Sider>
-                <Content :style="{padding: '1%'}">
-                    <router-view></router-view>
-                </Content>
-            </Layout>
-        </Layout>
-    </div>
+  <div>
+    <Layout :style="{minHeight: '100vh'}">
+      <h></h>
+      <Layout>
+        <Sider collapsible :collapsed-width="78" v-model="isCollapsed" @on-collapse="collapseing">
+          <m></m>
+        </Sider>
+        <Content :style="{padding: '1%'}">
+          <router-view></router-view>
+        </Content>
+      </Layout>
+    </Layout>
+  </div>
 </template>
 
 <script>

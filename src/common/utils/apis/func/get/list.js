@@ -24,5 +24,3 @@ for(let i = 0; i < 10; i++) {
 }
 
 Mock.mock('/apis/func/get/list', 'get', data)
-
-console.log("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~")
