@@ -33,6 +33,12 @@ export default {
         console.log('请求失败：'+resp.status+','+resp.statusText);
       });
     }, 4000)
+
+    this.get('/test?a=1&b=3').then(function(resp){
+        console.log(resp, resp.data);
+      }).catch(resp => {
+        console.log('请求失败：'+resp.status+','+resp.statusText);
+      })
   },
   methods: {
     setLi: function(index) {

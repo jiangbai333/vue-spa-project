@@ -10,7 +10,7 @@ import './resource/css/base.css'
 import 'iview/dist/styles/iview.css'
 import 'nprogress/nprogress.css'
 
-require('../../common/utils/apis/func/get/list.js')
+require('../../common/utils/apis/construct.js')
 
 Vue.config.debug = true; //开启错误提示
 Vue.config.devtools = true; //开启devtools扩展
